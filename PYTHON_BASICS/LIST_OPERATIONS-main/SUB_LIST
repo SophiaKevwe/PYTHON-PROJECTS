@@ -1,0 +1,17 @@
+def sub(listt):
+    # v = listt[0]*2
+    v = listt[0]
+    for x in listt:
+        v = v - x
+    v = v + listt[0]
+    return v
+
+
+# def sub(listt):
+#     v = listt[0]
+#     i = 1
+#     for x in listt:
+#         while i <= (len(listt)-1):
+#             v = v - listt[i]
+#             i = i + 1
+#     return v

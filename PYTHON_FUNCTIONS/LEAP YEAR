@@ -1,0 +1,6 @@
+def checkLeapYear(n):
+    if n % 4 == 0:
+        Statement = (f"{n} is a leap year")
+    else:
+        Statement = (f"{n} is not a leap year")
+    return Statement

@@ -1,0 +1,34 @@
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(f"The full list: {a}")
+b = a[0:3]
+c = a[-3:]
+print(f"The last three numbers of the list: {c}")
+c.reverse()
+print(f"The last three numbers of the list reversed: {c}")
+e = a[3:8]
+f = (2, 4, 6, 8)
+print(f"The first three numbers of the list: {b}")
+print(f"The numbers from 4 to 8: {e}")
+print(f"The multiple of all numbers in {f} is {mult(f)}")
+print(f"The division of all numbers in {f} is {div(f)}")
+print(f"The subtraction of all numbers in {f} is {sub(f)}")
+print(f"The average of all numbers in {f} is {avg(f)}")
+
+# for j in h:
+#     if h.index(j) == (h.index(5)-1) or h.index(j) == (h.index(5)+1):
+#         h.remove(j)
+# m = h.index(5)
+# for j in h:
+#     if h.index(j) == m:
+#         h.remove(h[m-1])
+#         h.remove(h[m])
+h = [2, 3, 4, 5, 6, 7, 8]
+print(f"The full list: {h}")
+i = 0
+while h[i] != 5:
+    i = i + 1
+a = (h[i - 1])
+b = (h[i + 1])
+h.remove(a)
+h.remove(b)
+print(f"The list without 4 and 6 is {h}")

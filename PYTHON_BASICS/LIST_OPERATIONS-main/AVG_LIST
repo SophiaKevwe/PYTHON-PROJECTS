@@ -1,0 +1,4 @@
+def avg(listt):
+    x = sum(listt)
+    avgg = x/len(listt)
+    return avgg

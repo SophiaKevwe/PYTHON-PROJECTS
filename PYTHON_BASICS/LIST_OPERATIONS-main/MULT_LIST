@@ -1,0 +1,5 @@
+def mult(listt):
+    s = 1
+    for x in listt:
+        s = s * x
+    return s

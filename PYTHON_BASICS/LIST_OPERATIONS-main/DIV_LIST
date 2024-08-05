@@ -1,0 +1,17 @@
+
+def div(listt):
+    t = listt[0]
+    for x in listt:
+        t = t / x
+    t = t * listt[0]
+    return t
+
+
+# def div(listt):
+#     i = 0
+#     t = listt[0]
+#     for x in listt:
+#         while i < (len(listt)-1):
+#             t = t / listt[i+1]
+#             i = i + 1
+#     return t

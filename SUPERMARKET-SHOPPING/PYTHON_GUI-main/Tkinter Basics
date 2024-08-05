@@ -1,0 +1,73 @@
+from tkinter import *
+#blank window
+newwin = Tk()
+newwin.title("SOPHIA's APP")
+
+#window size
+newwin.geometry("1000x700")
+# newwin.configure(bg='blue')
+# newwin['bg']='yellow'
+
+
+#label widget
+#use the grid function to add it to the window
+lb1 = Label(newwin, text= "Welcome to your dashboard \nPlease enter your name below", font = ("Times New Roman", 22))
+lb1.grid(column = 0, row = 0)
+
+# handle button click event
+# handles textbox
+# has to be placed before the button
+def button1clicked():
+    dis = 'Welcome ' + txt.get()
+    lb2 = Label(newwin, text= dis, font = ("Times New Roman", 22))
+    lb2.grid(column=0, row=3)
+
+
+#bg = button color
+#fg = text color
+#command = action
+button1 = Button(newwin, text= "ENTER", bg= "blue", fg= "black", font= ("Times New Roman", 22), command=button1clicked)
+button1.grid(column = 0, row = 2)
+
+# get input using entry class
+txt = Entry(newwin, font= ("Times New Roman", 22))
+txt.grid(column = 0, row = 1)
+
+lb3= Label(newwin, text = "Please select the size of your Sausage", font= ("Times New Roman", 22))
+lb3.grid(column = 0, row = 4)
+
+# Add radio buttons widgets
+selected = StringVar()
+rad1 = Radiobutton(newwin, text='Small', value="Small", variable=selected, font= ("Times New Roman", 17))
+rad1.grid(column = 0, row = 5)
+rad2 = Radiobutton(newwin, text='Medium', value='Medium', variable=selected, font= ("Times New Roman", 17))
+rad2.grid(column = 0, row = 6)
+rad3 = Radiobutton(newwin, text='Large', value='Large', variable=selected, font= ("Times New Roman", 17))
+rad3.grid(column = 0, row = 7)
+
+def check_selected():
+    print(selected.get())
+
+button2 = Button(newwin, text = "ENTER", bg = "blue", fg = "black", font= ("Times New Roman", 22), command=check_selected)
+button2.grid(column= 0, row= 8)
+
+chk_checkedd = StringVar()
+chk_checkedd.set("Ketchup")
+chk_check = StringVar()
+chk_check.set("Mustard")
+chkbutton1 = Checkbutton(newwin, text = 'Ketchup', variable=chk_checkedd, font=("Times New Roman", 22))
+chkbutton1.grid(column=0, row=10)
+chkbutton2 = Checkbutton(newwin, text ='Mustard', variable=chk_check, font=("Times New Roman", 22))
+chkbutton2.grid(column=0, row=11)
+
+def check_chk_():
+    print(chk_check.get())
+
+lb4 = Label(newwin, text= "Please select a topping", font= ("Times New Roman", 22))
+lb4.grid(column=0, row=9)
+
+button3 = Button(newwin, text="ENTER", bg="blue", fg="black", font=("Times New Roman", 22), command=check_chk_)
+button3.grid(column=0, row=12)
+
+newwin.mainloop()
+

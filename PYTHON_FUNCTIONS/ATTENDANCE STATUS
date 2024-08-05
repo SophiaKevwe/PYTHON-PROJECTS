@@ -1,0 +1,7 @@
+def checkAttendanceStatus(n):
+    n = (n / 12) * 100
+    if n <= 75:
+        statement = ("you are not eligible to write this exam")
+    else:
+        statement = ("you are eligible to write this exam")
+    return statement

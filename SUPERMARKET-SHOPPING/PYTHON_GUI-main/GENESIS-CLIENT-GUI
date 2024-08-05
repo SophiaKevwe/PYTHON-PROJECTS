@@ -1,0 +1,250 @@
+from tkinter import *
+from DATABASE import GENESIS_DATABASE as gdb
+
+window = Tk()
+window.title("GENESIS SUPERMARKET")
+window.geometry("1200x600")
+
+
+############################# Operations Functions ##################################
+# Populate Listbox with menu
+def view_menu():
+    list1.delete(0, END)
+    for x in gdb.menu():
+        list1.insert(END, x)
+
+# Populate Listbox with orders
+def view_order():
+    list2.delete(0, END)
+    for x in gdb.view_all():
+        list2.insert(END, x)
+
+
+# Selected item
+def get_selected_order(event):
+
+    global selected_order
+    index = list2.curselection()[0]
+    selected_order = list2.get(index)
+
+# Add Order
+def add_order(namee, sizep, add_pep, extra_cheese, total):
+    namee = txt.get()
+    gdb.insert(namee, sizep, add_pep, extra_cheese, total)
+    addd_dialog.destroy()
+    list2.delete(0, END)
+    view_order()
+
+# Delete selected order from database
+def delete_order(id):
+    id = str(id)
+    gdb.delete(id)
+    delete_dialog.destroy()
+    view_order()
+
+
+# Update Order
+def update_order(id, pizzasze, pepp, chee, totall):
+    def total(sizep, add_pepperoni, extra_cheese):
+        bill = 0
+        if sizep.upper() == "S":
+            bill = 1500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 200
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "M":
+            bill = 2000
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "L":
+            bill = 2500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        else:
+            print("INVALID INPUT")
+            total(sizep, add_pepperoni, extra_cheese)
+        return bill
+    totall = total(pizzasze, pepp, chee)
+    gdb.update(id, pizzasze, pepp, chee, totall)
+    update_dialog.destroy()
+    view_order()
+
+
+############################# Operations Functions ##################################
+# Add Order Dialog
+def add_order_dialog():
+    global addd_dialog
+    addd_dialog= Toplevel(window)
+
+    psize = Label(addd_dialog, text="Pizza size(S/M/L)", font=("Times New Roman", 20))
+    psize.grid(column=0, row=0)
+
+
+    psize_txt = Entry(addd_dialog, font=("Times New Roman", 20))
+    psize_txt.grid(column=1, row=0)
+
+    peppe = Label(addd_dialog, text="Pepperoni(Y/N)", font=("Times New Roman", 20))
+    peppe.grid(column=0, row=1)
+
+    peppe_txt = Entry(addd_dialog, font=("Times New Roman", 20))
+    peppe_txt.grid(column=1, row=1)
+
+    chee = Label(addd_dialog, text="Cheese(Y/N)", font=("Times New Roman", 20))
+    chee.grid(column=0, row=2)
+
+    chee_txt = Entry(addd_dialog, font=("Times New Roman", 20))
+    chee_txt.grid(column=1, row=2)
+
+    def total(sizep, add_pepperoni, extra_cheese):
+        bill = 0
+        if sizep.upper() == "S":
+            bill = 1500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 200
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "M":
+            bill = 2000
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "L":
+            bill = 2500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        else:
+            print("INVALID INPUT")
+            total(sizep, add_pepperoni, extra_cheese)
+        return bill
+
+
+    # Create Button it calls the add_oder func to add an order
+    add_btn = Button(addd_dialog, text="PROCEED", bg="blue", fg="black", font=("Times New Roman", 20), command=lambda: add_order(txt.get(), psize_txt.get(), peppe_txt.get(), chee_txt.get(), total(psize_txt.get(), peppe_txt.get(), chee_txt.get())))
+    add_btn.grid(column=1, row=3)
+
+
+def update_order_dialog(id):
+    global update_dialog
+    update_dialog = Toplevel(window)
+
+    psize = Label(update_dialog, text="Pizza size(S/M/L)", font=("Times New Roman", 20))
+    psize.grid(column=0, row=1)
+
+    psize_txt = Entry(update_dialog, font=("Times New Roman", 20))
+    psize_txt.grid(column=1, row=1)
+
+    peppe = Label(update_dialog, text="Pepperoni(Y/N)", font=("Times New Roman", 20))
+    peppe.grid(column=0, row=2)
+
+    peppe_txt = Entry(update_dialog, font=("Times New Roman", 20))
+    peppe_txt.grid(column=1, row=2)
+
+    chee = Label(update_dialog, text="Cheese(Y/N)", font=("Times New Roman", 20))
+    chee.grid(column=0, row=3)
+
+    chee_txt = Entry(update_dialog, font=("Times New Roman", 20))
+    chee_txt.grid(column=1, row=3)
+
+    def total(sizep, add_pepperoni, extra_cheese):
+        bill = 0
+        if sizep.upper() == "S":
+            bill = 1500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 200
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "M":
+            bill = 2000
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        elif sizep.upper() == "L":
+            bill = 2500
+            if add_pepperoni.upper() == "Y":
+                bill = bill + 300
+            if extra_cheese.upper() == "Y":
+                bill = bill + 100
+        else:
+            print("INVALID INPUT")
+            total(sizep, add_pepperoni, extra_cheese)
+        return bill
+
+    # Create Button it calls the update_oder func to update an order
+    upd_btn = Button(update_dialog, text="PROCEED", bg="blue", fg="black", font=("Times New Roman", 20), command=lambda: update_order(id, psize_txt.get(), peppe_txt.get(), chee_txt.get(), total(psize_txt.get(), peppe_txt.get(), chee_txt.get())))
+    upd_btn.grid(column=1, row=4)
+
+
+def delete_order_dialog(id):
+    global delete_dialog
+    delete_dialog = Toplevel(window)
+
+    ans = Label(delete_dialog, text="Do you want to delete this order", font=("Times New Roman", 20))
+    ans.grid(column=0, row=0)
+
+    yes_btn = Button(delete_dialog, text="YES", font=("Times New Roman", 20), command=lambda: delete_order(id))
+    yes_btn.grid(column=1, row=1)
+
+    no_btn = Button(delete_dialog, text="NO", font=("Times New Roman", 20), command=lambda: delete_dialog.destroy())
+    no_btn.grid(column=2, row=1)
+
+############################# UI of the main window ##################################
+lb1 = Label(window, text= "WELCOME TO GENESIS SUPERMARKET", font=("Times New Roman", 22))
+lb1.grid(column=0, row=0)
+lb2 = Label(window, text= "Please enter your name: ", font=("Times New Roman", 22))
+lb2.grid(column=0, row=1)
+
+txt = Entry(window, font= ("Times New Roman", 22))
+txt.grid(column=1, row=1)
+
+def button1clicked():
+    dis = 'Welcome ' + txt.get()
+    lb2 = Label(window, text= dis, font = ("Times New Roman", 22))
+    lb2.grid(column=0, row=2)
+
+
+button1 = Button(window, text="ENTER", bg="blue", fg="black", font=("Times New Roman", 20), command=button1clicked)
+button1.grid(column=1, row=2)
+lb3 = Label(window, text= "Would you like to view our menu or proceed to placing your order: ", font=("Times New Roman", 22))
+lb3.grid(column=0, row=3)
+# Button that calls the make_order dialog to make an order and add to the DB
+add_btn = Button(window, text="Place your order", bg="blue", fg="black", font=("Times New Roman", 20), command=add_order_dialog)
+add_btn.grid(row=4, column=0)
+# Button that calls the view_menu dialog to view the menu
+add_btn2 = Button(window, text="Menu", bg="blue", fg="black", font=("Times New Roman", 20), command=view_menu)
+add_btn2.grid(row=5, column=0)
+# Button that calls the update_order dialog to make changes to order
+update_btn = Button(window, text="Change order", bg="blue", fg="black", font=("Times New Roman", 20),  command=lambda: update_order_dialog(selected_order[0]))
+update_btn.grid(row=6, column=0)
+# Button that calls the delete_order dialog
+delete_btn = Button(window, text="Delete order", bg="red", fg="black", font=("Times New Roman", 20), command=lambda: delete_order_dialog(selected_order[0]))
+delete_btn.grid(row=7, column=0)
+# Listbox that holds the data of the menu
+list1 = Listbox(window, height=6, width=46)
+list1.grid(row=2, column=1, rowspan=18, columnspan=1)
+# Listbox that holds the data of orders
+list2 = Listbox(window, height=6, width=46)
+list2.grid(row=6, column=1, rowspan=18, columnspan=1)
+# Scrollbar that will control the Listbox
+sb1 = Scrollbar(window, bg="blue", )
+sb1.grid(row=2, column=2, rowspan=6)
+sb2 = Scrollbar(window, bg="blue", )
+sb2.grid(row=6, column=2, rowspan=6)
+# Configure the listbox and the scrollbar to work together
+list1.configure(yscrollcommand=sb1.set)
+sb1.configure(command=list1.yview)
+list2.configure(yscrollcommand=sb2.set)
+sb2.configure(command=list2.yview)
+
+list2.bind('<<ListboxSelect>>', get_selected_order)
+
+window.mainloop()
+

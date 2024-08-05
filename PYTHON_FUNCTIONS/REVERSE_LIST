@@ -1,0 +1,6 @@
+
+def dispalyReverseList(k):
+    k = set(k)
+    k = list(k)
+    k.reverse()
+    return k
